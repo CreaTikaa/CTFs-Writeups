@@ -34,7 +34,7 @@ Ce script va lui aussi GET un fichier à `http://korp.htb/a541a` avec `5337d3229
 
 On récupère donc ce fichier pour voir ce qu’il y a de beau à l’intérieur, peut-être du code malveillant, ou alors, un flag ? 
 
-
+![image-1](https://github.com/user-attachments/assets/3d72173f-3dcb-4a57-9247-5746e5528a2d)
 
 ![alt text](image-2.png)
 
