@@ -49,7 +49,7 @@ Dans la premère fonction visible, on peut directement y trouver les identifiant
 
 ### Flag 5 :  What is the name of the task scheduled by the attacker ?
 
-Maintenant il nous faut comprendre comment l'encryption marche, pour pouvori décrypter le reste des trames dans la capture Wireshark. Ici on peut comprendre un peu plus ce qu'il ce passe :   
+Maintenant il nous faut comprendre comment l'encryption marche, pour pouvoir décrypter le reste des trames de la capture Wireshark. Ici on peut comprendre un peu plus ce qu'il ce passe :   
 
 ![fonctionnement file](https://github.com/user-attachments/assets/8da47bde-ce7e-4e6c-a684-5a7a6074b9cd)
 
