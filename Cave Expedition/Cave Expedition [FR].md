@@ -1,10 +1,10 @@
 # Cave Expedition
 ### Rumors of a black drake terrorizing the fields of Dunlorn have spread far and wide. The village has offered a hefty bounty for its defeat. Sir Alaric and Thorin answered the call also returning with treasures from its lair. Among the retrieved items they found a map. Unfortunately it cannot be used directly because a custom encryption algorithm was probably used. Luckily it was possible to retrieve the original code that managed the encryption process. Can you investigate about what happened and retrieve the map content?
 
-Dès le début du challenge, nous avons le fichier `map.pdf.secured`, celui que nous devons lire pour obtenir le flag, ainsi que fichiers `.evtx` (jouraux d'évènements Windows).  
+Dès le début du challenge, nous avons le fichier `map.pdf.secured`, celui que nous devons lire pour obtenir le flag, ainsi que fichiers `.evtx` (jouraux d'évènements Windows).    
 ![files](https://github.com/user-attachments/assets/906c16ff-26d0-4acb-b3b0-09741e59965e)
 
-Je remarque vite que tout les fichiers de logs font la même taille, et ils sont tous vide, donc je trie par Taille, et je vois que seul un fichier contient des donneés :   
+Je remarque vite que tout les fichiers de logs font la même taille, et ils sont tous vide, donc je trie par Taille, et je vois que seul un fichier contient des donneés :    
 ![taille](https://github.com/user-attachments/assets/d6db4250-2c2e-4ad3-9286-40cbe779972f)
 
 En l'analysant, je tombe sur ça :   
@@ -149,5 +149,5 @@ $decryptedBytes = l34Vn $encryptedBytes $key1Bytes $key2Bytes
 
 [System.IO.File]::WriteAllBytes("map.pdf", $decryptedBytes)
 ```
-Et grâce à ça, le fichier `map.pdf.secured` redevient alors `map.pdf` et on peut l'ouvrir à nouveau, et voila ce qu'on y trouve :   
+Et grâce à ça, le fichier `map.pdf.secured` redevient alors `map.pdf` et on peut l'ouvrir à nouveau, et voila ce qu'on y trouve :     
 ![map pdf](https://github.com/user-attachments/assets/2603a026-e9fa-48fa-a967-2cf2d4048fc3)
