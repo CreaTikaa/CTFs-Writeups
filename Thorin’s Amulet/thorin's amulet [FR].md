@@ -36,9 +36,10 @@ On récupère donc ce fichier pour voir ce qu’il y a de beau à l’intérieur
 
 ![image-1](https://github.com/user-attachments/assets/3d72173f-3dcb-4a57-9247-5746e5528a2d)
 
-![alt text](image-2.png)
+![image-2](https://github.com/user-attachments/assets/bd53afe3-731d-4c8f-ac03-4ec33485ca0c)
 
 Bon du coup, on rend ça lisible et une petite surprise nous attends : 
 
-![alt text](image-3.png)
+![image-3](https://github.com/user-attachments/assets/792052b8-7580-48a2-b91c-112da43214da)
+
 
