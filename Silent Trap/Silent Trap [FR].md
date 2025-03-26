@@ -41,7 +41,7 @@ Puis on peut récupérer son hash md5 :
 
 ### Flag 4 :  What credentials were used to log into the attacker’s mailbox ?
 
-Donc maintenant, nous avons accès au malware qui est un `.NET executable`. On le déssassemble grâce à **dotPeek**. 
+Donc maintenant, nous avons accès au malware qui est un `.NET executable`. On le désassemble grâce à **dotPeek**. 
 
 Dans la premère fonction visible, on peut directement y trouver les identifiants, aussi visibles dans les trames wireshark.  
 
