@@ -61,7 +61,7 @@ Au passage, merci à @Kaddate pour m'aider à comprendre parfaitement tout ce qu
  ![xor key](https://github.com/user-attachments/assets/44b4dc62-28bc-4990-b582-8b9678c99c4b)
  ![exor](https://github.com/user-attachments/assets/0615f2a4-9ca1-4bc6-bc6f-7cd46b8ce7bc)
 
-Maintenant qu'on à toutes ces informations, on peut décrypter les commandes CMD que l'attaquant éxécute sur le serveur en extrayant toutes les trams IMF après un FETCH de l'attaquant :   
+Maintenant qu'on à toutes ces informations, on peut décrypter les commandes CMD que l'attaquant éxécute sur le serveur en extrayant toutes les trames IMF après un FETCH de l'attaquant :   
 
 ![ttt](https://github.com/user-attachments/assets/76911b01-abf9-4dfd-bf26-fc4e65f835b3)
 
