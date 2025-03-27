@@ -54,10 +54,12 @@ Le fichier étant une database, pour voir la dernière URL il suffit juste de fa
 SELECT url, title, visit_count, last_visit_time FROM urls ORDER BY last_visit_time DESC;
 ```
 Ou alors simplement de lire le fichier avec DB Browser  
+
 ![last url](https://github.com/user-attachments/assets/81a67d84-0fe4-4acc-a650-b1ed4b9bf2d9)
 
 ### Flag 6 : What is the password of selene@rangers.eldoria.com ?
 Il est temps de plongé plus profondément dans cet extension malfaisante. On va dump tout ce qui la concerne pour analyser tout ça.  
+
 ![dumpaa](https://github.com/user-attachments/assets/552d1745-f44f-461a-9a2b-a4dac9074d04)
 ![flag6num2](https://github.com/user-attachments/assets/498c9a01-67dd-429d-9f05-c459f5eb441b)
  
@@ -107,6 +109,7 @@ chrome.runtime.onMessage.addListener(
 );
 ```
 On dump alors le fichier de log, un peu de tri pour le rendre lisible plus facilement, et puis :   
+
 ![log file](https://github.com/user-attachments/assets/b26627c4-e280-447c-9d05-7bbb54392511)
 
 On voit finalement le mot de passe **`clip-mummify-proofs`** à la fin du fichier.
