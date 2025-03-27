@@ -6,7 +6,7 @@ First, the challenge welcomes us with an .eml file, so an email. We then open it
 ![mail](https://github.com/user-attachments/assets/5a98887e-2016-47fd-9278-ea2060108038)
 
 We then go to the link provided by the challenge after making a small modification to `/etc/hosts` and entering the port provided by the challenge.
-We then arrive at an index.php file, which prompts us to click a button to reveal the famous CV :
+We then arrive at an index.php file, which prompts us to click a button to reveal the CV :
 
 ![index php](https://github.com/user-attachments/assets/2e5a353f-aa1d-4f3f-84c3-cc4508fa220d)
 
