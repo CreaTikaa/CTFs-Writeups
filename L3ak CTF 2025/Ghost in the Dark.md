@@ -26,7 +26,7 @@ En récupérant payload.enc en cleartext, on peut y lire `ransom_note.txt` mais 
 
 ![image 6](https://github.com/CreaTikaa/CTFs-Writeups/blob/main/L3ak%20CTF%202025/screenshots/image6.png)
 
-Voici le résultat, une fois déchiffrer :
+Voici le résultat, une fois déchiffré :
 
 ![image 7](https://github.com/CreaTikaa/CTFs-Writeups/blob/main/L3ak%20CTF%202025/screenshots/image7.png)
 
