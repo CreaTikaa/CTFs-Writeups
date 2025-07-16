@@ -4,6 +4,7 @@
 <img width="475" height="529" alt="image9" src="https://github.com/user-attachments/assets/4728ff95-01cb-4a38-84be-898f5fc4ff1e" />
 
 Voici toutes les questions auxquels nous devons répondre pour ce challenge : 
+
 ![alt](https://github.com/CreaTikaa/CTFs-Writeups/blob/main/L3ak%20CTF%202025/screenshots/image_questions.png)
 
 Pour ce faire nous avons une capture du drive `C:` sur Windows, effectué avec KAPE. 
@@ -13,6 +14,7 @@ Pour le début de l'investigation, j'utilise l'outil d'analyse **Autopsy**
 
 **Question 1 : What was the ComputerName of the device ?** 
 Je vais dans `Operating System Information` sur Autopsy pour avoir le nom de l'ordinateur : 
+
 ![computer_name](https://github.com/user-attachments/assets/1af14e0a-b046-4376-9cc6-fe166c825415)
 
 Réponse : 99PHOENIXDOWNS
@@ -45,6 +47,7 @@ Réponse : 192.168.0.114
 
 Pour cela, je me suis rendu au path C:\Users\NotVi\AppData\Local\Google\CHrome\User Data\Default, la ou l'historique et d'autres informations sont présentes, et j'ai ouvert la database contenant l'historique avec **DB Browser** : 
 Puis avec une simple query SQL, on voit tout les URLs visités, on sélectionne celui sur GitHub : 
+
 ![bluebook](https://github.com/user-attachments/assets/67addc8c-1292-4912-90c1-ded0f701a67f)
 
 Réponse : https://github.com/dbissell116/DFIR/blob/main/Blue_Book/Blue_Book.md
@@ -74,6 +77,55 @@ Et c'est dedans, que dans `C\Users\NotVi\OneDrive\Desktop` que j'avais noté via
 
 Réponse : Practice and take good notes.
 
+**Question 9 : What are the SSID of the second Wi-Fi network they connected to ?**
 
+On peut déjà répondre à cette question avec nos informations de la question 2, mais si on veut être sur, on peut aller vérifier dans `Microsoft-Windows-WLAN-AutoConfig/Operational.evtx ` puis trier les connexions par ordre chronologique, pour voir qu'il se connecte à `AlleyCat` après `mugs_guest_5G`.
 
+Réponse : AlleyCat
+
+**Question 10 : When did they obtain the second lease ?**
+Pour cette question, on cherche exactement de la même manière que pour la question 3.
+
+<img width="1189" height="645" alt="dhcp_lease1" src="https://github.com/user-attachments/assets/058a6811-678e-4f61-a9ba-7422f76dac57" />
+
+Puis on convertit aussi en UTC, et on trouve la réponse.
+
+Réponse : `2025-05-14 00:35:07`
+
+**Question 11 : What was the IP address assigned at the second café ?**
+Encore une fois, nous avons déjà la réponse à cette question grâce aux informations obtenues auparavant pour la question 4. 
+Donc il suffit de reprendre notre capture d'écran et de noter l'autre adresse IP.
+
+![interfaces_infos](https://github.com/user-attachments/assets/3c099d70-ea7b-44ab-a50f-5ee4f0b0ef33)
+
+Réponse : 10.0.6.28
+
+**Question 12 : What website did they log into at the second café ?**
+
+Retour dans **DB Browser** pour aller visiter l'historique Chrome comme déjà fait auparavant.
+
+<img width="820" height="292" alt="website leak" src="https://github.com/user-attachments/assets/7737816e-cea3-403c-9557-2fce8746c87d" />
+
+Réponse : l3ak.team
+
+**Question 13 : What was the MAC address of the Wi-Fi adapter used ?**
+
+On se rend à nouveau dans `Microsoft-Windows-WLAN-AutoConfig/Operational.evtx` pour trouver un évènement `11004` qui contient le SSID réseau `AlleyCat` recerché, et la réponse.
+
+<img width="539" height="228" alt="mac_address" src="https://github.com/user-attachments/assets/d374b2c5-7370-46ad-b17e-5f7ae2415dec" />
+
+Réponse : `48:51:C5:35:EA:53`
+(et la réponse était aussi au même endroit que les IPs des deux interfaces, mais j'ai répondu à cette question avant les autres)
+
+**Question 14 : What city did this take place in ?**
+
+Et pour finir, on trouve ou ce cache ce fameux **Ghost**, non sans un peu de mal dans mes recherches, mais au bout d'un moment on tombe bien sur ceci : 
+
+![localisation](https://github.com/user-attachments/assets/515a8ade-f9f3-4978-b662-bca4f66130cd)
+
+Réponse : Fort Collins 
+
+**Conclusion**
+
+Une fois toutes les questions répondus, on obtient enfin le flag final : `L3AK{Gh057_R!d!ng_7h3_W4v35}`
 
