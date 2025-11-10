@@ -1,6 +1,6 @@
 On commence par un scan nmap de l'ip fournit dans l'énoncé pour identifier les techs utilisés, on obtient :
 
-![image.png](attachment:9f05991e-7392-4127-ac7f-b8b14ef3a1f7:image.png)
+<img width="820" height="158" alt="image" src="https://github.com/user-attachments/assets/38186a6f-1790-47e4-a776-225a1bbf2b9e" />
 
 `COOKIE{Flask:Werkzeug:3.1.3:3.13.5}`
 
@@ -21,7 +21,7 @@ Nous montre le fichier "flag", donc il suffit de le lire :
 {{ self.__init__.__globals__.__builtins__.__import__('os').popen('cat /home/app/flag').read() }}
 ```
 
-![image.png](attachment:389c6d81-abdd-4b2d-8210-149f9e4520ed:image.png)
+<img width="815" height="459" alt="image" src="https://github.com/user-attachments/assets/3402f041-974d-4295-b7fc-3ba8e28f66c3" />
 
 Ensuite, dans l'énoncé on nous parle d'un certain script de backup. Le challenge ayant une 3ème parti qui est de la priv esc, on se doute que c'est surement le coup classique de la backup qui tourne en root. On vérifie donc 
 ```python
@@ -60,4 +60,4 @@ Et puis on créer les fichiers qui seront interprétés comme des arguments par 
 
 Puis il suffit d'attendre que le fichier de backup s'éxécute, et voila : 
 
-![image.png](attachment:867da6b2-84bd-4240-b2ab-2d11fae0a6c3:image.png)
+<img width="641" height="295" alt="image" src="https://github.com/user-attachments/assets/a5afe4c3-900d-42e8-a29a-e29b2720ce93" />
