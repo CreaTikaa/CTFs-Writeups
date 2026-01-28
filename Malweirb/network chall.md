@@ -134,13 +134,13 @@ On y voit donc des conseils super importants à suivre, (et un peu bizarre quand
 
 Bon du coup on continue de regarder, et il download évidemment un truc un peu bizarre. Mais ce qui est le plus intéréssants, c’est qu’après le download du “jeu” il y a ça : 
 
-![image.png](https://github.com/CreaTikaa/CTFs-Writeups/blob/main/Malweirb/screenshots/screen3Clarified the process of reversing Python malware and extracting the flag key. Added details about .pyc files and tools for decompilation..png)
+![image.png](https://github.com/CreaTikaa/CTFs-Writeups/blob/main/Malweirb/screenshots/image.png)
 
 Il y à 3 rêquetes `GET` à des endpoints un peu spéciaux, `/api/pubkey` qui récupère une clé publique, `/api/exfiltrate` et `/api/key` . Très étrange tout ça. 
 
 Pour avoir une vue d’ensemble de ce qu’il ce passe : 
 
-![image.png](https://github.com/CreaTikaa/CTFs-Writeups/blob/main/Malweirb/screenshots/screen4.png)
+![image.png](https://github.com/CreaTikaa/CTFs-Writeups/blob/main/Malweirb/screenshots/screen3.png)
 
 En bleu, l’host se balade un peu sur le site ce qui nous donne des infos sur ce qu’il fait, puis en rouge il download le “jeu” et notre flag (qui ce fait chiffrer en même temps) avec. 
 
@@ -148,7 +148,7 @@ En bleu, l’host se balade un peu sur le site ce qui nous donne des infos sur c
 
 J’extrait donc tout les objets HTTP de la capture avec Wireshark, et je me retrouve avec ça : 
 
-![image.png](https://github.com/CreaTikaa/CTFs-Writeups/blob/main/Malweirb/screenshots/image.png)
+![image.png](https://github.com/CreaTikaa/CTFs-Writeups/blob/main/Malweirb/screenshots/screen4.png)
 
 On regarde un peu ce qu’il y à dedans : 
 
