@@ -205,9 +205,12 @@ bpython3.12/lib-dynload/_lzma.cpython-312-x86_64-linux-gnu.so
 bpython3.12/lib-dynload/_multibytecodec.cpython-312-x86_64-linux-gnu.so
 bpython3.12/lib-dynload/resource.cpython-312-x86_64-linux-gnu.so
 8libpython3.12.so.1.0
-```
+```  
 
-Tiens, tiens, tiens. C’est du Python, pas du C. Mais du coup, il faut reverse du Python ? Bah ouais. Et j’ai aucune idée de comment on fait ça, donc je me renseigne. Après un peu de recherche, je trouve un tool qui m’a l’air bien sympa : https://github.com/extremecoders-re/pyinstxtractor. Il va nous permettre de transformer le binaire en de multiples `.pyc`. Mais d’ailleurs, c’est quoi un .pyc même ? Un fichier **.pyc** c’est un fichier Python compilé qui contient du **bytecode**, c’est-à-dire une représentation de bas niveau de code source Python. 
+Tiens, tiens, tiens. C’est du Python, pas du C. Mais du coup, il faut reverse du Python ? 
+Bah ouais. Et j’ai aucune idée de comment on fait ça, donc je me renseigne. Après un peu de recherche, je trouve un tool qui m’a l’air bien sympa :    
+
+https://github.com/extremecoders-re/pyinstxtractor. Il va nous permettre de transformer le binaire en de multiples `.pyc`. Mais d’ailleurs, c’est quoi un .pyc même ? Un fichier **.pyc** c’est un fichier Python compilé qui contient du **bytecode**, c’est-à-dire une représentation de bas niveau de code source Python. 
 
 ![image.png](https://github.com/CreaTikaa/CTFs-Writeups/blob/main/Malweirb/screenshots/screen7.png)
 
@@ -328,7 +331,8 @@ Comment ça marche :
 
 ## 4. Et donc, il est ou le flag la ?
 
-Maintenant on comprend mieux comment tout ça fonctionne, et notre objectif est donc d’obtenir la clé privée stockée uniquement sur le serveur qui à envoyé le malware pour pouvoir déchiffrer le contenu du flag. On sait que la clé est envoyé sur `/api/key` avec un `POST`. Donc en vrai, on pourrait pas juste demander au serveur de gentillemment nous refiler la clé ? Peut être. Sauf que l’ip du serveur c’est du [localhost](http://localhost) la, donc ça va être compliqué. Mais vous vous rappelez de l’instance Docker donc on à parler au début ? Maintenant tout devient clair. 
+Maintenant on comprend mieux comment tout ça fonctionne, et notre objectif est donc d’obtenir la clé privée stockée uniquement sur le serveur qui à envoyé le malware pour pouvoir déchiffrer le contenu du flag. On sait que la clé est envoyé sur `/api/key` avec un `POST`.  
+Donc en vrai, on pourrait pas juste demander au serveur de gentillemment nous refiler la clé ? Peut être. Sauf que l’ip du serveur c’est du [localhost](http://localhost) la, donc ça va être compliqué. Mais vous vous rappelez de l’instance Docker donc on à parler au début ? Maintenant tout devient clair. 
 
 Un petit GET sur `<p:port> /api/key` et on obtient ce super résultat : 
 
