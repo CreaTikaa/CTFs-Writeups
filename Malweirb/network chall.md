@@ -207,7 +207,7 @@ bpython3.12/lib-dynload/resource.cpython-312-x86_64-linux-gnu.so
 8libpython3.12.so.1.0
 ```
 
-Tiens, tiens, tiens. C’est du Python, pas du C. Mais du coup, il faut reverse du Python ? Bah ouais. Et j’ai aucune idée de comment on fait ça, donc je me renseigne. Après un peu de recherche, je trouve un tool qui m’a l’air bien sympa : https://github.com/extremecoders-re/pyinstxtractor. Il va nous permettre de transformer le binaire en de multiples `.pyc`. Mais d’ailleurs, c’est quoi un .pyc même ? Un fichier **.pyc** c’est ****un fichier Python compilé qui contient du **bytecode**, c’est-à-dire une représentation de bas niveau de code source Python. 
+Tiens, tiens, tiens. C’est du Python, pas du C. Mais du coup, il faut reverse du Python ? Bah ouais. Et j’ai aucune idée de comment on fait ça, donc je me renseigne. Après un peu de recherche, je trouve un tool qui m’a l’air bien sympa : https://github.com/extremecoders-re/pyinstxtractor. Il va nous permettre de transformer le binaire en de multiples `.pyc`. Mais d’ailleurs, c’est quoi un .pyc même ? Un fichier **.pyc** c’est un fichier Python compilé qui contient du **bytecode**, c’est-à-dire une représentation de bas niveau de code source Python. 
 
 ![image.png](https://github.com/CreaTikaa/CTFs-Writeups/blob/main/Malweirb/screenshots/screen7.png)
 
