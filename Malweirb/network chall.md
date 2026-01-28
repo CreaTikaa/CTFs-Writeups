@@ -5,11 +5,11 @@
 
 On commence le challenge avec l’accès à 2 choses, une instance Docker qui mène à une 404 quand on l’ouvre, je suppose donc que ça sera utile plus tard, et surtout un fichier de capture réseau `capture.pcap`. 
 
-![image.png](attachment:177aa137-9453-4c68-aad3-7c4b557ccac3:image.png)
+![image.png](https://github.com/CreaTikaa/CTFs-Writeups/blob/main/Malweirb/screenshots/screen1.png)
 
 La capture n’est pas très grande, seulement 452 paquets. On jette un coup d’oeil aux statistiques pour avoir une vue d’ensemble de qui parle avec qui et comment.
 
-![image.png](attachment:10e80172-75e3-430e-9456-f665d818eaf5:image.png)
+![image.png](https://github.com/CreaTikaa/CTFs-Writeups/blob/main/Malweirb/screenshots/screen2.png)
 
 Tout les traffic est entre deux hosts, l’auteur de la capture et 127.1.10.56, donc tout ce passe sur la même machine. On va donc ignorer les IPs pour le moment sans chercher plus loin, et plutôt ce concentrer sur le traffic pour voir qu’est ce que ce fameux Minecraft gratuit à ramené avec lui. 
 
@@ -134,13 +134,13 @@ On y voit donc des conseils super importants à suivre, (et un peu bizarre quand
 
 Bon du coup on continue de regarder, et il download évidemment un truc un peu bizarre. Mais ce qui est le plus intéréssants, c’est qu’après le download du “jeu” il y a ça : 
 
-![image.png](attachment:a536dc21-5798-4717-b7b2-c18bf2215849:image.png)
+![image.png](https://github.com/CreaTikaa/CTFs-Writeups/blob/main/Malweirb/screenshots/screen3.png)
 
 Il y à 3 rêquetes `GET` à des endpoints un peu spéciaux, `/api/pubkey` qui récupère une clé publique, `/api/exfiltrate` et `/api/key` . Très étrange tout ça. 
 
 Pour avoir une vue d’ensemble de ce qu’il ce passe : 
 
-![image.png](attachment:d765f372-e7f5-4df3-b7da-1cb1a297211e:image.png)
+![image.png](https://github.com/CreaTikaa/CTFs-Writeups/blob/main/Malweirb/screenshots/screen4.png)
 
 En bleu, l’host se balade un peu sur le site ce qui nous donne des infos sur ce qu’il fait, puis en rouge il download le “jeu” et notre flag (qui ce fait chiffrer en même temps) avec. 
 
@@ -148,7 +148,7 @@ En bleu, l’host se balade un peu sur le site ce qui nous donne des infos sur c
 
 J’extrait donc tout les objets HTTP de la capture avec Wireshark, et je me retrouve avec ça : 
 
-![image.png](attachment:45316d4d-7113-417e-911d-6299a4bf704c:image.png)
+![image.png](https://github.com/CreaTikaa/CTFs-Writeups/blob/main/Malweirb/screenshots/screen5.png)
 
 On regarde un peu ce qu’il y à dedans : 
 
@@ -174,7 +174,7 @@ Tout correspond bien à ce qu’on a remarqué dans le pcap. Pendant le download
 
 On va donc continuer en regardant ce qu’il ce passe dans `download`, qui est, très probablement un malware, si on est sérieux 2 minutes. 
 
-![image.png](attachment:8e9435c5-5073-4de5-b05e-48d30d07a20e:image.png)
+![image.png](https://github.com/CreaTikaa/CTFs-Writeups/blob/main/Malweirb/screenshots/screen6.png)
 
 C’est bien un binaire, par habitude je lance un strings dessus pour voir si je peux chopper des informations rapidement. Et en lisant l’output, je tombe sur des trucs un peu particulier : 
 
@@ -209,7 +209,7 @@ bpython3.12/lib-dynload/resource.cpython-312-x86_64-linux-gnu.so
 
 Tiens, tiens, tiens. C’est du Python, pas du C. Mais du coup, il faut reverse du Python ? Bah ouais. Et j’ai aucune idée de comment on fait ça, donc je me renseigne. Après un peu de recherche, je trouve un tool qui m’a l’air bien sympa : https://github.com/extremecoders-re/pyinstxtractor. Il va nous permettre de transformer le binaire en de multiples `.pyc`. Mais d’ailleurs, c’est quoi un .pyc même ? Un fichier **.pyc** c’est ****un fichier Python compilé qui contient du **bytecode**, c’est-à-dire une représentation de bas niveau de code source Python. 
 
-![image.png](attachment:bc2916a5-5ea5-4242-93f2-f3f1b209e049:image.png)
+![image.png](https://github.com/CreaTikaa/CTFs-Writeups/blob/main/Malweirb/screenshots/screen7.png)
 
 Et il s’avère que depuis un `.pyc` on peut utiliser un outils spécifique ou simplement le site https://pylingual.io/ (Merci à la membre du staff pour le tips !!) et on obtient le code source. Donc vous le voyez très bien ce `malware.pyc` juste au dessus la non ? Et bien voici le code à l’intérieur : 
 
@@ -360,4 +360,4 @@ print(plaintext.decode())
 
 ## FLAAAAAAAAAAAAAAAAAAAAAG !!!
 
-![image.png](attachment:a027cd74-4f76-4969-87e0-37b3d3fd9667:image.png)
+![image.png](https://github.com/CreaTikaa/CTFs-Writeups/blob/main/Malweirb/screenshots/screen7.png)
