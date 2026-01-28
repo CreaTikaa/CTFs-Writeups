@@ -1,7 +1,7 @@
 # challenge_name
 ### image ou challenge desc
 
-## 1. Il ce passe quoi en gros ?
+## 1. Il se passe quoi en gros ?
 
 On commence le challenge avec l’accès à 2 choses, une instance Docker qui mène à une 404 quand on l’ouvre, je suppose donc que ça sera utile plus tard, et surtout un fichier de capture réseau `capture.pcap`. 
 
@@ -170,7 +170,7 @@ On regarde un peu ce qu’il y à dedans :
 
 Tout correspond bien à ce qu’on a remarqué dans le pcap. Pendant le download du “Minecraft”, la machine reçoit aussi un fichier `flag.txt.enc` qui est chiffré (c’est le `exfiltrate` sur le screen). Avec ça, on à donc l’`encrypted_key`, `l’iv` , et la clé publique qui ont tout les 3 servis à chiffrer le flag. Mais on ne peut pas encore déchiffrer flag.txt.enc en flag.txt avec ça, il nous faut la clé privée qui va avec la publique pour ce faire. 
 
-## 3. Ouais mais du coup il ce passe quoi pour DE VRAI ?
+## 3. Ouais mais du coup il se passe quoi pour DE VRAI ?
 
 On va donc continuer en regardant ce qu’il ce passe dans `download`, qui est, très probablement un malware, si on est sérieux 2 minutes. 
 
