@@ -332,6 +332,7 @@ Comment ça marche :
 ## 4. Et donc, il est ou le flag la ?
 
 Maintenant on comprend mieux comment tout ça fonctionne, et notre objectif est donc d’obtenir la clé privée stockée uniquement sur le serveur qui à envoyé le malware pour pouvoir déchiffrer le contenu du flag. On sait que la clé est envoyé sur `/api/key` avec un `POST`.  
+
 Donc en vrai, on pourrait pas juste demander au serveur de gentillemment nous refiler la clé ? Peut être. Sauf que l’ip du serveur c’est du [localhost](http://localhost) la, donc ça va être compliqué. Mais vous vous rappelez de l’instance Docker donc on à parler au début ? Maintenant tout devient clair. 
 
 Un petit GET sur `<p:port> /api/key` et on obtient ce super résultat : 
