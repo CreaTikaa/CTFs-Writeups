@@ -11,9 +11,9 @@ La capture n’est pas très grande, seulement 452 paquets. On jette un coup d�
 
 ![image.png](https://github.com/CreaTikaa/CTFs-Writeups/blob/main/Malweirb/screenshots/screen2.png)
 
-Tout les traffic est entre deux hosts, l’auteur de la capture et 127.1.10.56, donc tout ce passe sur la même machine. On va donc ignorer les IPs pour le moment sans chercher plus loin, et plutôt ce concentrer sur le traffic pour voir qu’est ce que ce fameux Minecraft gratuit à ramené avec lui. 
+Tous les trafics sont entre deux hôtes, l’auteur de la capture est 127.1.10.56, donc tout se passe sur la même machine. On va donc ignorer les IPs pour le moment sans chercher plus loin, et plutôt se concentrer sur le trafic pour voir ce que ce fameux Minecraft gratuit a ramené avec lui.
 
-On filtre donc la capture sur http pour voir les échanges entre l’host et ce super site qui nous permet de jouer à Minecraft, ce qui nous laisse avec 20 paquets visibles. On analyse un peu ce qu’il ce passe en regardant le TCP Stream. 
+On filtre donc la capture sur http pour voir les échanges entre l’host et ce super site qui nous permet de jouer à Minecraft, ce qui nous laisse avec 20 paquets visibles. On analyse un peu se qu’il ce passe en regardant le TCP Stream. 
 
 Le traffic est lisible assez facilement : 
 
@@ -130,27 +130,27 @@ Notre utilisateur se dirige donc sur la page d’installation :
 </html>
 ```
 
-On y voit donc des conseils super importants à suivre, (et un peu bizarre quand même) pour installer ce truc, c’est étrange j’ai l’impression que va falloir reverse ce truc dans quelques minutes. ^^
+On y voit donc des conseils super importants à suivre, (et un peu bizarre quand même) pour installer ce truc. C’est étrange, j’ai l’impression qu’il va falloir reverse ce truc dans quelques minutes. ^^
 
-Bon du coup on continue de regarder, et il download évidemment un truc un peu bizarre. Mais ce qui est le plus intéréssants, c’est qu’après le download du “jeu” il y a ça : 
+Bon, du coup on continue de regarder, et il download évidemment un truc un peu bizarre. Mais le plus intéressant, c’est qu’après le download du “jeu” il y a ça : 
 
 ![image.png](https://github.com/CreaTikaa/CTFs-Writeups/blob/main/Malweirb/screenshots/image.png)
 
-Il y à 3 rêquetes `GET` à des endpoints un peu spéciaux, `/api/pubkey` qui récupère une clé publique, `/api/exfiltrate` et `/api/key` . Très étrange tout ça. 
+Il y a 3 requêtes `GET` à des endpoints un peu spéciaux, `/api/pubkey` qui récupère une clé publique, `/api/exfiltrate` et `/api/key`. Très étrange tout ça. 
 
-Pour avoir une vue d’ensemble de ce qu’il ce passe : 
+Pour avoir une vue d’ensemble de ce qu’il se passe :
 
 ![image.png](https://github.com/CreaTikaa/CTFs-Writeups/blob/main/Malweirb/screenshots/screen3.png)
 
-En bleu, l’host se balade un peu sur le site ce qui nous donne des infos sur ce qu’il fait, puis en rouge il download le “jeu” et notre flag (qui ce fait chiffrer en même temps) avec. 
+En bleu, l’host se balade un peu sur le site ce qui nous donne des infos sur ce qu’il fait, puis en rouge il download le “jeu” et notre flag (qui se fait chiffrer en même temps) avec. 
 
 ## 2. On analyse les trucs bizarres
 
-J’extrait donc tout les objets HTTP de la capture avec Wireshark, et je me retrouve avec ça : 
+J’extrais donc tous les objets HTTP de la capture avec Wireshark, et je me retrouve avec ça :
 
 ![image.png](https://github.com/CreaTikaa/CTFs-Writeups/blob/main/Malweirb/screenshots/screen4.png)
 
-On regarde un peu ce qu’il y à dedans : 
+On regarde un peu ce qu’il y a dedans : 
 
 ```jsx
 ❯ cat key\(1\)
@@ -168,17 +168,17 @@ On regarde un peu ce qu’il y à dedans :
 {"public_key":"LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUlJQklqQU5CZ2txaGtpRzl3MEJBUUVGQUFPQ0FROEFNSUlCQ2dLQ0FRRUFxKzBqaVE3OFUzUjVUVkl4aVE3UgpqNUpIemNIZGtzL21WYi9IS05uQXlTVHVNRWJGbGd5N2RzOWlpTldDRStVWTNVcHRwMDhscTZLTFlkQnhkcDY3CmJYU2o5NXN6OTlXazBjT1Q4ekRIa2VMWm8yNkZVM3Q1Y1VnRVVkdStiMXVZME05NUhZcVBEeDdkb3c2QXJHVjIKZWRxOXZHM2ZqTXlYYXJBd2xVYnd5ZjJ2R0sza1JRU3lIYlBTUHpxVnZkOFRJelZ5bnQxTEJLNS9GN0VYT2QzSQpsT3FtQytiZHhaZXBDQXYvQUF2UTlMUmx0THZNYUlwSlVuNC9pdUYrZTc2VHYzQUg3ZVhwcUIrVzBaRkw1Z2FBCllJOS96UGJ1WmtZakRIN210YUJtMXVva01tbU9CbHBzN2ZTWjBsM0RhYTFtTk5vZ09IWHc3NTlFRitMN3djaDcKVHdJREFRQUIKLS0tLS1FTkQgUFVCTElDIEtFWS0tLS0tCg=="}%
 ```
 
-Tout correspond bien à ce qu’on a remarqué dans le pcap. Pendant le download du “Minecraft”, la machine reçoit aussi un fichier `flag.txt.enc` qui est chiffré (c’est le `exfiltrate` sur le screen). Avec ça, on à donc l’`encrypted_key`, `l’iv` , et la clé publique qui ont tout les 3 servis à chiffrer le flag. Mais on ne peut pas encore déchiffrer flag.txt.enc en flag.txt avec ça, il nous faut la clé privée qui va avec la publique pour ce faire. 
+Tout correspond bien à ce qu’on a remarqué dans le pcap. Pendant le download du “Minecraft”, la machine reçoit aussi un fichier `flag.txt.enc` qui est chiffré (c’est le `exfiltrate` sur le screen). Avec ça, on a donc l'encrypted_key`, `l’iv`, et la clé publique qui ont tous les 3 servi à chiffrer le flag. Mais on ne peut pas encore déchiffrer flag.txt.enc en flag.txt avec ça, il nous faut la clé privée qui va avec la publique pour ce faire.
 
 ## 3. Ouais mais du coup il se passe quoi pour DE VRAI ?
 
-On va donc continuer en regardant ce qu’il ce passe dans `download`, qui est, très probablement un malware, si on est sérieux 2 minutes. 
+On va donc continuer en regardant ce qu’il se passe dans `download`, qui est, très probablement un malware, si on est sérieux 2 minutes.
 
 ![image.png](https://github.com/CreaTikaa/CTFs-Writeups/blob/main/Malweirb/screenshots/screen6.png)
 
-C’est bien un binaire, par habitude je lance un strings dessus pour voir si je peux chopper des informations rapidement. Et en lisant l’output, je tombe sur des trucs un peu particulier : 
+C’est bien un binaire, par habitude je lance un string dessus pour voir si je peux chopper des informations rapidement. Et en lisant l’output, je tombe sur des trucs un peu particuliers : 
 
-(tout était pas à côté j’ai évidemment cut pour la lisibilité)
+(tout n'était pas à côté, j’ai évidemment cut pour la lisibilité)
 
 ```
 ❯ strings download 
@@ -214,7 +214,7 @@ https://github.com/extremecoders-re/pyinstxtractor. Il va nous permettre de tran
 
 ![image.png](https://github.com/CreaTikaa/CTFs-Writeups/blob/main/Malweirb/screenshots/screen7.png)
 
-Et il s’avère que depuis un `.pyc` on peut utiliser un outils spécifique ou simplement le site https://pylingual.io/ (Merci à la membre du staff pour le tips !!) et on obtient le code source. Donc vous le voyez très bien ce `malware.pyc` juste au dessus la non ? Et bien voici le code à l’intérieur : 
+Et il s’avère que depuis un `.pyc` on peut utiliser un outil spécifique ou simplement le site https://pylingual.io/ (Merci à la membre du staff pour le tips !!) Et on obtient le code source. Donc vous le voyez très bien ce `malware.pyc` juste au-dessus là, non ? Eh bien voici le code à l’intérieur :
 
 ```python
 # Decompiled with PyLingual (https://pylingual.io)
@@ -331,9 +331,9 @@ Comment ça marche :
 
 ## 4. Et donc, il est ou le flag la ?
 
-Maintenant on comprend mieux comment tout ça fonctionne, et notre objectif est donc d’obtenir la clé privée stockée uniquement sur le serveur qui à envoyé le malware pour pouvoir déchiffrer le contenu du flag. On sait que la clé est envoyé sur `/api/key` avec un `POST`.  
+Maintenant on comprend mieux comment tout ça fonctionne, et notre objectif est donc d’obtenir la clé privée stockée uniquement sur le serveur qui a envoyé le malware pour pouvoir déchiffrer le contenu du flag. On sait que la clé est envoyée sur `/api/key` avec un `POST`.
 
-Donc en vrai, on pourrait pas juste demander au serveur de gentillemment nous refiler la clé ? Peut être. Sauf que l’ip du serveur c’est du [localhost](http://localhost) la, donc ça va être compliqué. Mais vous vous rappelez de l’instance Docker donc on à parler au début ? Maintenant tout devient clair. 
+Donc en vrai, on ne pourrait pas juste demander au serveur de gentiment nous refiler la clé ? Peut-être. Sauf que l’ip du serveur c’est du [localhost](http://localhost) là, donc ça va être compliqué. Mais vous vous rappelez de l’instance Docker donc on a parlé au début ? Maintenant tout devient clair.
 
 Un petit GET sur `<p:port> /api/key` et on obtient ce super résultat : 
 
