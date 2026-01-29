@@ -365,4 +365,4 @@ print(plaintext.decode())
 
 ## FLAAAAAAAAAAAAAAAAAAAAAG !!!
 
-![image.png](https://github.com/CreaTikaa/CTFs-Writeups/blob/main/Malweirb/screenshots/screen7.png)
+![image.png](https://github.com/CreaTikaa/CTFs-Writeups/blob/main/Malweirb/screenshots/screen8.png)
